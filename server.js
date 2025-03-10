@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const methodOverride = require("method-override");
 const morgan = require("morgan");
 const dotenv = require("dotenv");
+const authController = require("./controllers/auth.js");
 
 // initialize express app
 const app = express();
@@ -24,6 +25,8 @@ mongoose.connection.on("connected", () => {
 app.use(express.urlencoded({ extended: false }));  // parsing data from url
 app.use(methodOverride("_method"));  // for using HTTP PUT or DELETE
 app.use(morgan("dev"));  //morgan for logging HTTP requests
+//router code is actually a type of middleware
+app.use("/auth", authController);
 
 //mount routes
 
